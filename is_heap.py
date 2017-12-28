@@ -1,10 +1,13 @@
-def is_heap(heap_array):
+
+def is_heap(array):
+	
 	'''return true if hip_array has heap properties'''
-	for i in range(len(heap_array)//2, len(heap_array)):
-		j = i
-		while j > 1:
-			print('i',i,'j',j)
-			if heap_array[j//2] < heap_array[j]:
+	for i in range(1,(len(array)//2)+1):
+		if (2*i)+1 < len(array):
+			if array[i] < array[2*i] or array[i] < array[(2*i) +1]:
 				return False
-			j //=2
+		elif array[i] < array[2*i]:
+			return False
+		print('i',i,'i*2',2*i,'i*2+1')
+		
 	return True
