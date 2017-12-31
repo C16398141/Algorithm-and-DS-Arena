@@ -24,14 +24,20 @@ graph['b']['a'] = 3 # it takes 3 units to go from 'b' to 'a'
 graph['b']['end'] = 5 # it takes 5 units to go to the end from when at b
 
 # the last node contained in the graph is the end
-graph['end'] = {} # the end node points to points to nothing.(doesn't have a neighbour)
+graph['end'] = {} # the end node points to nothing. i.e it doesn't have a neighbours.
 
 
+# next create a hastable to store the cost of each node
+# this is the how many units it takes to come to this node counted from graph['start']
+# e.g from start to 'a' it takes 6 units, and from start to 'b' it takes 2 units.
+# but as the transversal continues this will change.
+# e.g from start then b then 'a' the cost to get to 'a' will be 5, this is the '5' it
+# the 2 it takes from the start to b plus the 3 it takes from b to a
+# if the cost of a node is not known it is initialised to infinity
 
+cost = {}
+infinity = float('inf')
 
-
-
-
-
-
-
+cost['a'] = 6
+cost['b'] = 2
+cost['end'] = infinity
