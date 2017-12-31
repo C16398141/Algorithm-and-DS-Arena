@@ -48,5 +48,39 @@ cost['end'] = infinity
 parent = {}
 parent['a'] = 'start'
 parent['b'] = 'start'
-parent['end'] = Node
+parent['end'] = None
 
+# ----- the algorithm -----
+
+
+
+def dijkstra(cost, parent):
+	# keep track of nodes I have already proceeded.
+	seen = set()
+	node = find_lowest_cost_node(cost,seen)
+	
+	while node is not None:
+		node_cost = cost[node] # get the cost if the current node
+		node_neighbours = graph[node] # get the neighbours of the current node
+		for neighbour in neighbours.keys(): # go through all the current node's neighbours
+			new_cost = node_cost + node_neighbours[neighbour]
+			if cost[neighbour] > new_cost: # if this neigbour has a higher cost, then
+				# update it to this newer low cost found
+				cost[neighbour] = new_cost # e.g to get from start to 'a' was 6, now start-> b + b-> a is now 5
+				# update the parent to the parent of the new low cost
+				parent[neighbour] = node # e.g the parent of 'a' was originally 'start' now change it to 'b'
+	
+		seen.add(node) # mark the node as seen
+		# go through the cost dictionary to get the node with the updated lowest cost
+		node = find_lowest_cost_node(cost,seen) 
+	
+def find_lowest_cost_node(cost, seen):
+	lowest_cost = float('inf')
+	lowest_cost_node = None
+	for node in cost: # go through all the keys
+		node_cost = cost[node] # the the cost value of the current node
+		if not node in seen and node_cost < lowest_cost:
+			lowest_cost = node_cost
+			lowest_cost_node = node
+			
+	return lowest_cost_node
